@@ -24,10 +24,6 @@ app.get('/',  (req, res) => {
     api.getAccessCode();
 
 
-   //console.log('username: '+api.username);
-
-   //res.status(200).json({ status: 'OK' });
-
 
   } else {
     res.status(500).json({ error: 'No Code. Can not auth' });
