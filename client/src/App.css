@@ -1,0 +1,53 @@
+.App-header {
+  background-color: #222;
+  padding: 20px;
+  color: white;
+  text-align: center;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+
+.login form input {
+  font-size: 20px;
+}
+
+.login h4 {
+  color: #FFFFFF;
+  font-size: 25px;
+}
+
+
+.subReddits {
+  background-color: #dfdfdf;
+}
+
+
+.displaySaves {
+
+}
+
+#subreddit-list {
+  list-style-type: none;
+  padding: 5px 5px;
+}
+
+.saveContainer {
+  padding: 10px 10px;
+  clear: left;
+}
+
+.saveContent {
+  min-width: 200px;
+  font-size: medium;
+  box-sizing: border-box;
+}
+
+.imgthumb {
+  max-width: 75px;
+  height: auto;
+  float: left;
+  margin-right: 8px;
+}
