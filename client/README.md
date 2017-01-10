@@ -1,1 +1,1 @@
-This is the client side for the application.s
+This is the client side for the application.
