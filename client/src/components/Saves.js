@@ -19,6 +19,8 @@ class Saves extends Component {
            <div className="saveContent">[+] <a href={item.data.url} target="_blank">{item.data.title ? item.data.title : item.data.link_title}</a></div>
          </div>
 
+         
+
 
      )
 

@@ -19,15 +19,15 @@ class ListSubreddits extends Component {
     render() {
 
       const subreddits = this.props.subreddits.map((item) =>
-        <li onClick={this.setActive.bind(this, item.name)} id={item.name} key={item.name}>{item.name}  <Badge>{item.count}</Badge></li>
+        <li className="list-group-item" onClick={this.setActive.bind(this, item.name)} id={item.name} key={item.name}>{item.name}  <Badge>{item.count}</Badge></li>
 
       )
 
       return(
 
         <div>
-          <ul id="subreddit-list">
-            <li onClick={this.setActive.bind(this, 'all')}>All Saves</li>
+          <ul className="list-group" id="subreddit-list">
+            <li className="list-group-item" onClick={this.setActive.bind(this, 'all')}>All Saves</li>
             {subreddits}
           </ul>
         </div>

@@ -9,6 +9,9 @@ import reddit from './../js/reddit.js';
 import ListSubreddits from './../components/ListSubreddits';
 import Saves from './Saves';
 
+// loading screen image
+import loadimg from './../img/logo.jpg'
+
 class Results extends Component {
     constructor(props) {
         super(props);
@@ -52,20 +55,19 @@ class Results extends Component {
         return (
             <div className="results">
 
-                {this.state.data.length > 0 ? '' :
-                      <div>Loading your saves.....</div>
+                {this.state.data.length > 0 ?
+                                 <Grid>
+                                  <Row className="show-grid" >
+                                    <Col className="subReddits" md={3}><ListSubreddits handelSubredditChange={this.handelSubredditChange} subreddits={this.state.subreddits} /></Col>
+                                    <Col className="displaySaves" md={9}>
+                                      <Saves mylinks={this.state.data} currentSubreddit={this.state.currentSubreddit} /></Col>
+                                  </Row>
+                                </Grid> :
+                      <div className="loading">Loading your saves.....<img className="imgrotate" src={loadimg} alt="loading" /></div>
 
                 }
 
-                <Grid>
-                  <Row className="show-grid" >
-                    <Col className="subReddits" md={2}><ListSubreddits handelSubredditChange={this.handelSubredditChange} subreddits={this.state.subreddits} /></Col>
-                    <Col className="displaySaves" md={10}><Saves mylinks={this.state.data} currentSubreddit={this.state.currentSubreddit} /></Col>
-                  </Row>
 
-
-
-                </Grid>
 
 
             </div>
