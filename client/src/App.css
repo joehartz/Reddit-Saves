@@ -83,3 +83,7 @@
   font-size: 12px;
   color: #666666;
 }
+
+.openimg {
+  cursor: pointer;
+}
