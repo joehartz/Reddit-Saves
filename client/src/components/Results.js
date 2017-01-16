@@ -2,15 +2,12 @@ import React, {Component} from 'react';
 import './../App.css';
 var _ = require('lodash');
 // react bootsstrap
-import {Grid, Row, Col} from 'react-bootstrap';
+import {Grid, Row, Col, ProgressBar} from 'react-bootstrap';
 
 // my stuff
 import reddit from './../js/reddit.js';
 import ListSubreddits from './../components/ListSubreddits';
 import Saves from './Saves';
-
-// loading screen image
-import loadimg from './../img/logo.jpg'
 
 class Results extends Component {
     constructor(props) {
@@ -18,7 +15,8 @@ class Results extends Component {
         this.state = {
             data: [],
             subreddits: [],
-            currentSubreddit: 'all'
+            currentSubreddit: 'all',
+            progress: 25
         };
 
         this.handelSubredditChange = this.handelSubredditChange.bind(this);
@@ -26,6 +24,8 @@ class Results extends Component {
     componentDidMount() {
         // we can ge the saves here...
         reddit.getSaves(() => {
+          this.setState({progress: this.state.progress + 35});
+
           if(reddit.fetching === false) {
 
             // make subreddit array
@@ -37,7 +37,15 @@ class Results extends Component {
 
             console.log('Done fetching results');
 
+
+            // set progress to 100%
+            this.setState({progress: 100});
+
+
             // time to set the state.....
+
+          } else {
+            this.setState({progress: this.state.progress + 35});
 
           }
         });
@@ -63,7 +71,9 @@ class Results extends Component {
                                       <Saves mylinks={this.state.data} currentSubreddit={this.state.currentSubreddit} /></Col>
                                   </Row>
                                 </Grid> :
-                      <div className="loading">Loading your saves.....<img className="imgrotate" src={loadimg} alt="loading" /></div>
+                      <div className="loading">
+                        <ProgressBar active now={this.state.progress} />
+                    </div>
 
                 }
 
