@@ -20,16 +20,14 @@ class Reddit {
 
     }
 
-    getAuthURL()
-    {
+    getAuthURL() {
 
         let url = `https://www.reddit.com/api/v1/authorize?client_id=${this.clientID}&response_type=code&state=${this.state}&redirect_uri=${this.redirectURL}&duration=${this.duration}&scope=${this.scope}`;
 
         return encodeURI(url);
     }
 
-    getAccessToken(cb)
-    {
+    getAccessToken(cb) {
         // get the url parameters
         this.code = this.getUrlParameter('code');
 
@@ -54,8 +52,7 @@ class Reddit {
 
     }
 
-    getSaves(cb)
-    {
+    getSaves(cb) {
         // only if we have an access token
         if (this.accessToken) {
 
@@ -104,10 +101,82 @@ class Reddit {
             : decodeURIComponent(results[1].replace(/\+/g, ' '));
     }
 
-    setAccesToken(token)
-    {
+    setAccesToken(token) {
         this.accessToken = token;
     }
+
+    normalize(item) {
+
+      const fs = {};
+
+      // thumbnail
+      if(item.data.thumbnail === 'default' || item.data.thumbnail === 'self' || item.data.thumbnail === '') {
+        fs.thumbnail = false;
+      } else {
+        fs.thumbnail = item.data.thumbnail;
+      }
+
+      // title
+      if (item.data.title) {
+        fs.title = item.data.title;
+
+      } else {
+        fs.title = item.data.link_title;
+      }
+
+      // subreddit
+      fs.subreddit = item.data.subreddit;
+
+      // domain
+      if (item.data.domain) {
+        fs.domain = item.data.domain;
+
+      } else {
+        fs.doamin = 'redit.com';
+      }
+
+      // author
+      if (item.data.author) {
+        fs.author = item.data.author;
+      } else {
+        fs.author = item.data.link_author;
+      }
+
+      // body html
+      if (item.data.body_html) {
+        fs.body_html = item.data.body_html;
+      } else {
+        fs.body_html = false;
+      }
+
+      // timestamp
+      fs.time = this.timeSince(item.data.created);
+
+      return fs;
+
+
+    }
+
+   timeSince(t) {
+     var timeStamp = new Date(t*1000);
+    var now = new Date(),
+        secondsPast = (now.getTime() - timeStamp.getTime() ) / 1000;
+    if(secondsPast < 60){
+        return parseInt(secondsPast, 10) + ' seconds ago';
+    }
+    if(secondsPast < 3600){
+        return parseInt(secondsPast/60, 10) + ' mins ago';
+    }
+    if(secondsPast <= 86400){
+        return parseInt(secondsPast/3600, 10) + ' hours ago';
+    }
+    if(secondsPast > 86400){
+          var day = timeStamp.getDate();
+          var month = timeStamp.toDateString().match(/ [a-zA-Z]*/)[0].replace(" ","");
+          var year = timeStamp.getFullYear() === now.getFullYear() ? "" :  " "+timeStamp.getFullYear();
+          return day + " " + month + year;
+    }
+  }
 
 }
 

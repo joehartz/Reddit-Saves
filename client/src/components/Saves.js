@@ -3,6 +3,7 @@ import './../App.css';
 var _ = require('lodash');
 import plus_open from './../img/plus-open.png'
 import {FormControl} from 'react-bootstrap';
+import reddit from './../js/reddit.js';
 //import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class Saves extends Component {
@@ -58,7 +59,7 @@ class Saves extends Component {
             {this.state.open === item.data.id && <div dangerouslySetInnerHTML={{
                 __html: this.htmldecode(item.data.body_html)
             }}></div>
-}
+          }
 
         </div>)
 

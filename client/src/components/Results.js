@@ -66,7 +66,8 @@ class Results extends Component {
                 {this.state.data.length > 0 ?
                                  <Grid>
                                   <Row className="show-grid" >
-                                    <Col className="subReddits" md={3}><ListSubreddits handelSubredditChange={this.handelSubredditChange} subreddits={this.state.subreddits} /></Col>
+                                    <Col className="subReddits" md={3}>
+                                      <ListSubreddits handelSubredditChange={this.handelSubredditChange} subreddits={this.state.subreddits} /></Col>
                                     <Col className="displaySaves" md={9}>
                                       <Saves mylinks={this.state.data} currentSubreddit={this.state.currentSubreddit} /></Col>
                                   </Row>
