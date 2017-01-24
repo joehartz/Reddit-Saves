@@ -1,10 +1,16 @@
 import Express from 'express';
 import Api from './server/api';
-require('dotenv').config();
+//require('dotenv').config({path: 'client/'});
+require('dotenv').config()
 
 // Setup the app...
 var app = new Express;
 var api = new Api;
+
+// Express only serves static assets in production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+}
 
 
 // Allow cross origin CORS, or we can use a proxy
@@ -14,7 +20,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.get('/',  (req, res) => {
+app.get('/server',  (req, res) => {
   if(req.query.code)
   {
     // we have the code now we can try to auth
@@ -32,6 +38,6 @@ app.get('/',  (req, res) => {
   }
 });
 
-app.listen(3004, function () {
-  console.log('This app listening on port 3004!')
+app.listen(3001, function () {
+  console.log('This app listening on port 3001!')
 })

@@ -7,7 +7,6 @@ class Reddit {
         // setup env variables
         this.clientID = process.env.REACT_APP_CLIENTID;
         this.redirectURL = process.env.REACT_APP_REDIRECT_URL;
-        this.host = process.env.REACT_APP_REACT_APP_SERVER;
         this.scope = process.env.REACT_APP_SCOPE;
 
         this.duration = 'permanent';
@@ -33,12 +32,10 @@ class Reddit {
 
         if (this.code) {
 
-            // make a request to out node server!
-            let request = new Request(this.host + '?code=' + this.code, {
-                method: 'get',
-                mode: 'cors',
+            // make a request to the node server!
+            let request = new Request('/server/?code=' + this.code, {
                 headers: {
-                    'Content-Type': 'application/json'
+                     accept: 'application/json',
                 }
             });
 

@@ -3,10 +3,10 @@ var request = require('request');
 export default class Api {
   constructor()
   {
-     this.appSecret = process.env.APPSECRET;
-     this.clientID = process.env.CLIENTID;
+     this.appSecret = process.env.REACT_APP_APPSECRET;
+     this.clientID = process.env.REACT_APP_CLIENTID;
      this.code = '';
-     this.redirectURL = process.env.REDIRECTURL;
+     this.redirectURL = process.env.REACT_APP_REDIRECTURL;
      this.authURL = 'https://oauth.reddit.com/';
      this.username = '';
 
