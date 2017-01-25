@@ -106,6 +106,9 @@ class Reddit {
 
       const fs = {};
 
+      // set the id
+      fs.id = item.data.id;
+
       // thumbnail
       if(item.data.thumbnail === 'default' || item.data.thumbnail === 'self' || item.data.thumbnail === '') {
         fs.thumbnail = false;
@@ -119,6 +122,13 @@ class Reddit {
 
       } else {
         fs.title = item.data.link_title;
+      }
+
+      //url
+      if (item.data.url) {
+        fs.url = item.data.url;
+      } else {
+        fs.url = item.data.link_url;
       }
 
       // subreddit
@@ -166,6 +176,12 @@ class Reddit {
     }
     if(secondsPast <= 86400){
         return parseInt(secondsPast/3600, 10) + ' hours ago';
+    }
+    if(secondsPast <= 172800){
+        return parseInt(secondsPast/86400, 10) + ' day ago';
+    }
+    if(secondsPast <= 432000){
+        return parseInt(secondsPast/86400, 10) + ' days ago';
     }
     if(secondsPast > 86400){
           var day = timeStamp.getDate();
