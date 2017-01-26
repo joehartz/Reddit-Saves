@@ -9,7 +9,7 @@ class Reddit {
         this.redirectURL = process.env.REACT_APP_REDIRECT_URL;
         this.scope = process.env.REACT_APP_SCOPE;
 
-        this.duration = 'permanent';
+        this.duration = 'temporary';
         this.state = new Date().getUTCMilliseconds();
         this.code = '';
         this.accessToken = '';

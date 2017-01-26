@@ -5,9 +5,13 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon server.js --exec babel-node --presets es2015,stage-2",
+    "server": "nodemon server/server.js --exec babel-node",
+    "prod-server": "node dist/server.js",
     "client": "cd client && npm start",
-    "start": "concurrently \"npm run server\" \"npm run client\""
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "build-server": "npm run clean && babel ./server -d ./dist --presets es2015,stage-2",
+    "clean": "rm -rf dist && mkdir dist",
+    "prod-start": "concurrently \"npm run prod-server\" \"npm run client\""
   },
   "author": "Joe Hartz",
   "license": "ISC",
