@@ -17,6 +17,10 @@ class Reddit {
         this.fetching = true;
         this.subs = [];
 
+        if (process.env.NODE_ENV === 'production') {
+               this.redirectURL = process.env.REACT_APP_PROD_REDIRECT_URL;
+         }
+
     }
 
     getAuthURL() {
