@@ -7,7 +7,9 @@ require('dotenv').config()
 var app = new Express;
 var api = new Api;
 
-  console.log('ENV: ',process.env.NODE_ENV)
+app.set('port', (process.env.PORT || 3001));
+
+console.log('ENV: ',process.env.NODE_ENV)
 
 // Express only serves static assets in production
 if (process.env.NODE_ENV === 'production') {
@@ -32,6 +34,6 @@ app.get('/server',  (req, res) => {
   }
 });
 
-app.listen(3001, function () {
+app.listen(app.get('port'), function () {
   console.log('This app listening on port 3001!')
 })
