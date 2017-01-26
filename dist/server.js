@@ -23,7 +23,7 @@ console.log('ENV: ', process.env.NODE_ENV);
 
 // Express only serves static assets in production
 if (process.env.NODE_ENV === 'production') {
-  app.use(_express2.default.static('../client/build'));
+  app.use(_express2.default.static(__dirname + '/../client/build'));
 }
 
 app.get('/server', function (req, res) {
