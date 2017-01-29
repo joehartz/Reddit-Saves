@@ -38,6 +38,7 @@ class SavedItem extends Component {
 
                 <div className="top-description">
                   {this.props.data.body_html !== false && <img className="openimg" onClick={() => this.opentext(this.props.data.id)} role="presentation" src={plus_open}/>} {this.props.data.subreddit} | {this.props.data.domain} | {this.props.data.author} | {this.props.data.time}</div>
+                  <div><a href={this.props.data.permalink} target="_blank">Comments</a></div>
 
                 {this.state.open === true && <div dangerouslySetInnerHTML={{
                     __html: this.htmldecode(this.props.data.body_html)

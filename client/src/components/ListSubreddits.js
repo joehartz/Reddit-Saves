@@ -27,7 +27,7 @@ class ListSubreddits extends Component {
 
         <div>
           <ul className="list-group" id="subreddit-list">
-            <li className="list-group-item" onClick={this.setActive.bind(this, 'all')}>All Saves</li>
+            <li className="list-group-item" onClick={this.setActive.bind(this, 'all')}>All Saves <Badge>{this.props.count}</Badge></li>
             {subreddits}
           </ul>
         </div>

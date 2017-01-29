@@ -32,6 +32,7 @@ class Results extends Component {
             var sb = _(reddit.saves).groupBy('data.subreddit').map((items, name) => ({name, count: items.length})).value();
 
             var subredits = _.orderBy(sb, 'count', 'desc');
+
            // set state
            this.setState({subreddits:subredits, data: reddit.saves});
 
@@ -41,14 +42,12 @@ class Results extends Component {
             // set progress to 100%
             this.setState({progress: 100});
 
-
-            // time to set the state.....
-
           } else {
             this.setState({progress: this.state.progress + 35});
 
           }
         });
+
     }
 
     handelSubredditChange(currentSubreddit) {
@@ -60,6 +59,7 @@ class Results extends Component {
         console.log('Component will recive props...')
     }
     render() {
+
         return (
             <div className="results">
 
@@ -67,7 +67,7 @@ class Results extends Component {
                                  <Grid>
                                   <Row className="show-grid" >
                                     <Col className="subReddits" md={3}>
-                                      <ListSubreddits handelSubredditChange={this.handelSubredditChange} subreddits={this.state.subreddits} /></Col>
+                                      <ListSubreddits count={this.state.data.length} handelSubredditChange={this.handelSubredditChange} subreddits={this.state.subreddits} /></Col>
                                     <Col className="displaySaves" md={9}>
                                       <Saves mylinks={this.state.data} currentSubreddit={this.state.currentSubreddit} /></Col>
                                   </Row>

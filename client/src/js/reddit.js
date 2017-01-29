@@ -156,9 +156,14 @@ class Reddit {
       // body html
       if (item.data.body_html) {
         fs.body_html = item.data.body_html;
+      } else if (item.data.selftext_html){
+        fs.body_html = item.data.selftext_html;
       } else {
         fs.body_html = false;
       }
+
+      //permalink
+      fs.permalink = item.data.permalink ? 'http://www.reddit.com'+item.data.permalink : item.data.link_url;
 
       // timestamp
       fs.time = this.timeSince(item.data.created);

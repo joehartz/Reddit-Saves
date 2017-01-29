@@ -10,7 +10,6 @@ class Saves extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            open: 0,
             filterText: ''
         };
     }
@@ -21,57 +20,50 @@ class Saves extends Component {
     }
 
     filterText(filterText) {
-      this.setState({filterText: filterText});
+        this.setState({filterText: filterText});
 
     }
 
     opentext(id) {
 
         this.setState({open: id});
-        console.log('open ', id)
 
     }
 
     render() {
-        const filter = this.props.currentSubreddit !== 'all'
-            ? (_.filter(this.props.mylinks, ['data.subreddit', this.props.currentSubreddit]))
-            : (this.props.mylinks)
 
-            const savedrows = [];
+        // is there a filter search?
+        var filter = [];
+        if (this.state.filterText.length) {
+            this.props.mylinks.forEach((item) => {
+                if (item.data.title) {
+                    if (item.data.title.toLowerCase().indexOf(this.state.filterText.toLowerCase()) !== -1) {
+                        filter.push(item)
+                    }
 
-            filter.forEach((item)=>{
-              let data = reddit.normalize(item);
-              savedrows.push(<SavedItem key={data.id} data={data}/>);
+                } else {
+                    if (item.data.link_title) {
+                        if (item.data.link_title.toLowerCase().indexOf(this.state.filterText.toLowerCase()) !== -1) {
+                            filter.push(item)
+                        }
+                    }
+                }
 
+            });
+        } else {
+            filter = this.props.currentSubreddit !== 'all'
+                ? (_.filter(this.props.mylinks, ['data.subreddit', this.props.currentSubreddit]))
+                : (this.props.mylinks)
 
-            })
+        }
 
+        const savedrows = [];
 
-        // const saves = filter.map((item) => <div key={item.data.id} className="saveContainer">
-        //     {item.data.thumbnail === 'default' || item.data.thumbnail === 'self' || item.data.thumbnail === ''
-        //         ? ''
-        //         : <div className="saveImg"><img className="imgthumb" alt="" src={item.data.thumbnail}/></div>}
-        //     <div className="saveContent">
-        //         <a href={item.data.url
-        //             ? item.data.url
-        //             : item.data.link_url} target="_blank">{item.data.title
-        //                 ? item.data.title
-        //                 : item.data.link_title}</a>
-        //     </div>
-        //     <div className="top-description"><img className="openimg" onClick={() => this.opentext(item.data.id)} role="presentation" src={plus_open}/> {item.data.subreddit}
-        //          | {item.data.domain
-        //             ? item.data.domain
-        //             : 'reddit.com'}
-        //         | {item.data.author
-        //             ? item.data.author
-        //             : item.data.link_author}</div>
-        //
-        //     {this.state.open === item.data.id && <div dangerouslySetInnerHTML={{
-        //         __html: this.htmldecode(item.data.body_html)
-        //     }}></div>
-        //   }
-        //
-        // </div>)
+        filter.forEach((item) => {
+            let data = reddit.normalize(item);
+            savedrows.push(<SavedItem key={data.id} data={data}/>);
+
+        })
 
         return (
             <div>
@@ -86,29 +78,30 @@ class Saves extends Component {
 }
 
 class Search extends Component {
-  constructor(props) {
-      super(props);
-      this.state = {
-          value: ''
-      };
-  }
+    constructor(props) {
+        super(props);
+        this.state = {
+            value: ''
+        };
+    }
 
-  handleChange(event){
+
+handleChange(event) {
     this.setState({value: event.target.value});
     this.props.filterText(event.target.value);
 
-  }
+}
 
-    render() {
+render() {
 
-        return (
-            <div>
-                <form>
-                    <FormControl type="text" value={this.state.value} placeholder="Search by title..." onChange={(e) => this.handleChange(e)}/>
-                </form>
-            </div>
-        )
-    }
+    return (
+        <div>
+            <form>
+                <FormControl type="text" value={this.state.value} placeholder="Search by title..." onChange={(e) => this.handleChange(e)}/>
+            </form>
+        </div>
+    )
+}
 
 }
 
