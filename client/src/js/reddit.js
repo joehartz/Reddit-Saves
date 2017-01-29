@@ -19,7 +19,7 @@ class Reddit {
 
         if (process.env.NODE_ENV === 'production') {
                this.redirectURL = process.env.REACT_APP_PROD_REDIRECT_URL;
-               this.clientI = process.env.REACT_APP_CLIENTID_PROD;
+               this.clientID = process.env.REACT_APP_CLIENTID_PROD;
          }
 
     }
